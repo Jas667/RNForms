@@ -1,48 +1,61 @@
-import { StyleSheet, StatusBar, SafeAreaView, TextInput, Text, Switch, View } from 'react-native';
-import { useState } from 'react';
+import { StyleSheet, Button, TextInput, Text, View } from "react-native";
+import { useState } from "react";
 
 export default function App() {
-  const [name, setName] = useState('')
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   return (
-    <SafeAreaView style={styles.container}>
-      <TextInput style={styles.input} value={name} onChangeText={setName} />
-      <Text style={styles.text}>My name is: {name}</Text>
-      <View style={styles.switchContainer}>
-        <Text style={styles.text}>Dark Mode</Text>
-        <Switch value={isDarkMode} onValueChange={() => setIsDarkMode((previousState) => !previousState)}
-          trackColor={{
-            false: 'red',
-            true: 'green',
-          }}
-          thumbColor={isDarkMode ? 'blue' : 'red'}
+    <View style={styles.container}>
+      <View style={styles.form}>
+        <Text style={styles.label}>Username</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Enter your username"
+          value={username}
+          onChangeText={setUsername}
         />
+        <Text style={styles.label}>Password</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Enter your password"
+          secureTextEntry
+          value={password}
+          onChangeText={setPassword}
+        />
+        <Button title="Login" onPress={() => {}} />
       </View>
-    </SafeAreaView>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    paddingTop : StatusBar.currentHeight,
+    justifyContent: "center",
+    paddingHorizontal: 20,
+    backgroundColor: "#f5f5f5",
+  },
+  form: {
+    backgroundColor: "white",
+    padding: 20,
+    borderRadius: 8,
+    shadowColor: "black",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.26,
+    shadowRadius: 8,
+    elevation: 5,
+  },
+  label: {
+    fontSize: 18,
+    marginBottom: 5,
+    fontWeight: "bold",
   },
   input: {
     height: 40,
-    margin: 12,
+    borderColor: "#ddd",
     borderWidth: 1,
+    marginBottom: 15,
     padding: 10,
-
+    borderRadius: 5,
   },
-  text: {
-    fontSize: 30,
-    padding: 10,
-  },
-  switchContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingHorizontal: 10,
-  }
 });
